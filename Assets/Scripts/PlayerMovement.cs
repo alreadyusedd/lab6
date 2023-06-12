@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
+  
   public CharacterController2D controller;
 
   public float runSpeed = 40f;
@@ -19,9 +20,13 @@ public class PlayerMovement : MonoBehaviour {
   [SerializeField] private Transform _groundCheck;
   public float jump1 = 5f;
 
+
+
   void Update () {
 
     horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+
+  
 
     if (Input.GetButtonDown("Jump"))
     {
@@ -58,6 +63,9 @@ public class PlayerMovement : MonoBehaviour {
     }
     
   }
+
+  
+
   private bool IsGrounded()
   {
     return Physics2D.OverlapCircle(_groundCheck.position, 0.2f, _groundLayer);

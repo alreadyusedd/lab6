@@ -20,15 +20,21 @@ public class CharacterController2D : MonoBehaviour
 	private Vector3 _Velocity = Vector3.zero;
 	private bool _wasCrouching = false;
 
+  public int maxHealth = 100;
+  public int currentHealth;
+  public HealthBar healthBar;
+
 
     [Header("Player Animation Settings")]
     public Animator animator;
 
 
-    private void Start()
+    void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
 
+    currentHealth = maxHealth;
+    healthBar.SetMaxHealth(maxHealth);
 	}
 
 	private void FixedUpdate()
@@ -50,7 +56,6 @@ public class CharacterController2D : MonoBehaviour
 
 	public void Move(float move, bool crouch, bool jump)
 	{
-
 		if (crouch)
 		{
 			if (Physics2D.OverlapCircle(_CeilingCheck.position, _CeilingRadius, _WhatIsGround))
@@ -122,8 +127,7 @@ public class CharacterController2D : MonoBehaviour
 		}
 	}
 
-
-	private void Flip()
+  private void Flip()
 	{
 		_FacingRight = !_FacingRight;
 
@@ -131,4 +135,11 @@ public class CharacterController2D : MonoBehaviour
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
+
+  public void TakeDamage(int damage)
+  {
+    currentHealth -= damage;
+
+    healthBar.SetHealth(currentHealth);
+  }
 }
