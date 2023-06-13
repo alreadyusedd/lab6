@@ -8,6 +8,13 @@ public class HealthBar : MonoBehaviour
     public Slider slider;
     public Gradient gradient;
     public Image fill;
+    private CharacterController2D playerHealth;
+
+    // void Start()
+    // {
+    //   playerHealth = GameObject.FindObjectOfType<CharacterController2D>();
+    //   playerHealth.TakeDamage();
+    // }
 
     public void SetMaxHealth(int health)
     {
@@ -20,7 +27,7 @@ public class HealthBar : MonoBehaviour
     public void SetHealth(int health)
     {
       slider.value = health;
-      
+
       fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 }
